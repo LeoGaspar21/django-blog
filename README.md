@@ -1,2 +1,1 @@
-Terceiro e ultima tentativa
-prguou direitinho
+Blog feito no curso do professor Luiz Otavio Miranda
