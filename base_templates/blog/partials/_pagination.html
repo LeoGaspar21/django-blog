@@ -1,58 +1,47 @@
-<header class="header section-wrapper">
-    <div class="section-content-wide">
-      <div class="section-gap">
-  
-        <h1 class="blog-title center pb-base">
-          <a class="blog-link" href="/"> Blog do Luiz </a>
-        </h1>
-        
-        <p class="blog-description pb-base center">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores ipsam
-          neque explicabo sequi, voluptas saepe porro atque provident, reiciendis
-          natus harum labore nisi eum consectetur cumque minima dolorem adipisci?
-          Dolores?
-        </p>
-  
-        <div class="search pb-base center">
-          <form class="search-form" action="#" method="get">
-            <div class="search-content">
-              <label class="sr-only" id="search-label" for="search-input">Search</label>
-              <input
-                class="search-input"
-                type="search"
-                name="search"
-                id="search-input"
-                placeholder="Search"
-                value="Non risu potius quam oratione eiciendum? Quo pleb "
-              >
-              <button class="search-btn" type="submit" aria-labelledby="search-label">
-                <i class="fa fa-search"></i>
-              </button>
-            </div>
-          </form>
-        </div>
-  
-        <nav class="menu">
-          <ul class="menu-items">
-            <li class="menu-item">
-              <a class="menu-link" href="/post/">Post</a>
-            </li>
-            <li class="menu-item">
-              <a class="menu-link" href="/page/">Page</a>
-            </li>
-            <li class="menu-item">
-              <a class="menu-link" href="#">About us</a>
-            </li>
-            <li class="menu-item">
-              <a class="menu-link" href="#">Contact</a>
-            </li>
-            <li class="menu-item">
-              <a class="menu-link" href="#">Support</a>
-            </li>
-          </ul>
-        </nav>
-        
-      </div>
+{% if page_obj and page_obj.has_other_pages %}
+
+<div class="separator"></div>
+
+<div class="pagination-wrapper section-wrapper">
+  <div class="pagination-content section-content-wide">
+    <div class="pagination-gap section-gap">
+
+      <nav class="pagination-links" aria-label="Pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+              <a title="Page 1" aria-label="Page 1" href="?page=1{{ search_url }}">
+                  <i class="fa-solid fa-backward-fast"></i>
+              </a>
+              <a title="Page {{ page_obj.previous_page_number }}" aria-label="Page {{ page_obj.previous_page_number }}" href="?page={{ page_obj.previous_page_number }}{{ search_url }}">
+                <i class="fa-solid fa-circle-chevron-left"></i>
+              </a>
+            {% else %}
+              <span title="Current page" aria-current="page">
+                <i class="fa-solid fa-circle-chevron-up"></i>
+              </span>          
+            {% endif %}
+
+            <span class="current" title="Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}" aria-current="page">
+              {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
+            </span>
+
+            {% if page_obj.has_next %}
+              <a title="Page {{ page_obj.next_page_number }}" aria-label="Page {{ page_obj.next_page_number }}" href="?page={{ page_obj.next_page_number }}{{ search_url }}">
+                <i class="fa-solid fa-circle-chevron-right"></i>
+              </a>
+              <a title="Page {{ page_obj.paginator.num_pages }}" aria-label="Page {{ page_obj.paginator.num_pages }}" href="?page={{ page_obj.paginator.num_pages }}{{ search_url }}">
+                <i class="fa-solid fa-forward-fast"></i>
+              </a>
+            {% else %}
+              <span title="Current page" aria-current="page">
+                <i class="fa-solid fa-circle-chevron-up"></i>
+              </span>          
+            {% endif %}
+        </span>
+      </nav>
+      
     </div>
-  </header>
-  
+  </div>
+</div>
+
+{% endif %}
